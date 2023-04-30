@@ -24,6 +24,14 @@ $(document).keydown(function (e) {
     }
 });
 
+$("#level-title").click(function (e) {
+    if (gameLevel === 0) {
+        startGame();
+    } else if (isGameOver) {
+        startOver();
+    }
+});
+
 // Detect clicking on colored divs.
 $("div.btn").click(function (e) {
     let userChosenColour = $(this).attr("id");
@@ -55,7 +63,7 @@ function startOver() {
     $("body").removeClass("right-answer");
     gamePattern = makeColorSequence(gameLength);
     userClickedPattern = [];
-    $("#level-title").text("Press S to start.");
+    $("#level-title").text("Click here or Press S to start.");
     gameLevel = 0;
 }
 
@@ -66,7 +74,7 @@ function playNextLevel() {
         var Sound = new Audio("./sounds/applause.mp3");
         Sound.play();
         isGameOver = true;
-        $("#level-title").text("YOU WIN! Press S to play again.");
+        $("#level-title").text("YOU WIN! Click here or Press S to play again.");
         $("#level-title").addClass("finish-title");
         $("body").addClass("right-answer");
     } else {
@@ -92,7 +100,7 @@ function checkAnswer(pattern) {
             Sound.play();
         }, 500);
         $("body").addClass("game-over");
-        $("#level-title").text("Game Over. Press S to restart.");
+        $("#level-title").text("Game Over. Click here or Press S to restart.");
         isGameOver = true;
     }
 }
